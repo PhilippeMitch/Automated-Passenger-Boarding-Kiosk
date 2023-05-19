@@ -19,11 +19,10 @@ from azure.cognitiveservices.vision.face import FaceClient
 from azure.cognitiveservices.vision.face.models import TrainingStatusType
 from msrest.authentication import CognitiveServicesCredentials
 
-
 CONFIG = {
-    'SUBSCRIPTION_KEY': 'c6c1e24c984e4997babfe9161da908ee',
+    'SUBSCRIPTION_KEY': 'YOUR_SUBSCRIPTION_KEY',
     'LOCATION': 'trial',
-    'ACCOUNT_ID': '84d2de61-fa9e-4c0a-aa67-f39df642bef3'
+    'ACCOUNT_ID': 'YOUR_ACCOUNT_ID'
 }
 
 video_analysis = VideoIndexer(
@@ -31,8 +30,6 @@ video_analysis = VideoIndexer(
     vi_location=CONFIG['LOCATION'],
     vi_account_id=CONFIG['ACCOUNT_ID']
 )
-
-
 
 print(video_analysis.check_access_token())
 
@@ -44,11 +41,7 @@ uploaded_video_id = video_analysis.upload_to_video_indexer(
    video_language='English'
 )
 
-
 print(f"Uploaded video id's: {uploaded_video_id}")
-
-
-
 
 ### Extract face thumbnail
 
@@ -63,12 +56,9 @@ for shot in info["videos"][0]["insights"]["shots"]:
 for keyframe in keyframes:
     img_str = video_analysis.get_thumbnail_from_video_indexer(uploaded_video_id,  keyframe)
 
-
 thumbnail_id ="504218c6-7d5c-413a-a444-5bd2368c0b3c"
-
 
 img_code = video_analysis.get_thumbnail_from_video_indexer(uploaded_video_id,  thumbnail_id)
 img_stream = io.BytesIO(img_code)
 img = Image.open(img_stream)
 imshow(img)
-

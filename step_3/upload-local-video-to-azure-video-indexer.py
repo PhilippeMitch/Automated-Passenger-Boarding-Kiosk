@@ -15,15 +15,11 @@ from io import BytesIO
 from PIL import Image, ImageDraw
 
 from video_indexer import VideoIndexer
-from azure.cognitiveservices.vision.face import FaceClient
-from azure.cognitiveservices.vision.face.models import TrainingStatusType
-from msrest.authentication import CognitiveServicesCredentials
-
 
 CONFIG = {
-    'SUBSCRIPTION_KEY': 'c6c1e24c984e4997babfe9161da908ee',
+    'SUBSCRIPTION_KEY': 'YOUR_SUBSCRIPTION_KEY',
     'LOCATION': 'trial',
-    'ACCOUNT_ID': '84d2de61-fa9e-4c0a-aa67-f39df642bef3'
+    'ACCOUNT_ID': 'YOUR_ACCOUNT_ID'
 }
 
 video_analysis = VideoIndexer(
@@ -31,8 +27,6 @@ video_analysis = VideoIndexer(
     vi_location=CONFIG['LOCATION'],
     vi_account_id=CONFIG['ACCOUNT_ID']
 )
-
-
 
 print(video_analysis.check_access_token())
 
@@ -43,6 +37,5 @@ uploaded_video_id = video_analysis.upload_to_video_indexer(
    video_name='junior-11-second',  # unique identifier for video in Video Indexer platform
    video_language='English'
 )
-
 
 print(f"Uploaded video id's: {uploaded_video_id}")

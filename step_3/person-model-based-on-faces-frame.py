@@ -19,11 +19,10 @@ from azure.cognitiveservices.vision.face import FaceClient
 from azure.cognitiveservices.vision.face.models import TrainingStatusType
 from msrest.authentication import CognitiveServicesCredentials
 
-
 CONFIG = {
-    'SUBSCRIPTION_KEY': 'c6c1e24c984e4997babfe9161da908ee',
+    'SUBSCRIPTION_KEY': 'YOUR_SUBSCRIPTION_KEY',
     'LOCATION': 'trial',
-    'ACCOUNT_ID': '84d2de61-fa9e-4c0a-aa67-f39df642bef3'
+    'ACCOUNT_ID': 'YOUR_ACCOUNT_ID'
 }
 
 video_analysis = VideoIndexer(
@@ -31,8 +30,6 @@ video_analysis = VideoIndexer(
     vi_location=CONFIG['LOCATION'],
     vi_account_id=CONFIG['ACCOUNT_ID']
 )
-
-
 
 print(video_analysis.check_access_token())
 
@@ -44,9 +41,7 @@ uploaded_video_id = video_analysis.upload_to_video_indexer(
    video_language='English'
 )
 
-
 print(f"Uploaded video id's: {uploaded_video_id}")
-
 
 ### Extract face thumbnail
 
@@ -61,7 +56,6 @@ for keyframe in keyframes:
     img_str = video_analysis.get_thumbnail_from_video_indexer(uploaded_video_id,  keyframe)
 
 ### Create Face Recognition Model
-
 
 images = []
 #img_raw = []
@@ -83,21 +77,14 @@ for img in images:
     img.save('faces/human-face' + str(i) + '.jpg')
     i= i+ 1
 
-
-
 DOMINIC_FACE_KEY = "15c1923c980b4909bbd516912d605c2a"
-DOMINIC_FACE_ENDPOINT = "https://udacity-face-student.cognitiveservices.azure.com/"
-
-
+DOMINIC_FACE_ENDPOINT = "YOUR_ENDPOINT"
 
 # Create a client
 face_client = FaceClient(DOMINIC_FACE_ENDPOINT, CognitiveServicesCredentials(DOMINIC_FACE_KEY))
 
-
-
 PERSON_GROUP_ID = str(uuid.uuid4())
 person_group_name = 'dominic-santini-video-2'
-
 
 ## This code is taken from Azure Face SDK 
 def build_person_group(client, person_group_id, pgp_name):
@@ -128,7 +115,5 @@ def build_person_group(client, person_group_id, pgp_name):
             client.person_group.delete(person_group_id=PERSON_GROUP_ID)
             sys.exit('Training the person group has failed.')
         time.sleep(5)
-
-
 
 build_person_group(face_client, PERSON_GROUP_ID, person_group_name)

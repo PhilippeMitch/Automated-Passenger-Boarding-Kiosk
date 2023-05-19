@@ -1,8 +1,8 @@
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.formrecognizer import FormRecognizerClient
 
-AZURE_FORM_RECOGNIZER_ENDPOINT = "https://udacity-student-form-recognizer.cognitiveservices.azure.com/"
-AZURE_FORM_RECOGNIZER_KEY = "6dd4ec8b9eeb48b1b44b441d132c6043"
+AZURE_FORM_RECOGNIZER_ENDPOINT = "YOUR_ENDPOINT_URL"
+AZURE_FORM_RECOGNIZER_KEY = "YOUR_SECRET_KEY"
 
 endpoint = AZURE_FORM_RECOGNIZER_ENDPOINT
 key = AZURE_FORM_RECOGNIZER_KEY
